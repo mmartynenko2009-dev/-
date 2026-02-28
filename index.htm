@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Магній 🌀</title>
+
+<meta name="description" content="Магній — український ванільний Minecraft сервер. Правила, список гравців онлайн, моди та активна спільнота. Підтримка версій 1.21.6–1.21.11. Приєднуйся: СКОРО — Discord: СКОРО">
+
+<!-- Open Graph для соціальних мереж (Discord, Telegram, Facebook) -->
+<meta property="og:title" content="Магній 🌀 — Ванільний Український майн сервер">
+<meta property="og:description" content="Приєднайся до українського ванільного Minecraft сервера Магній! Класичне виживання без приватів, активна спільнота, детальні правила та статистика гравців. Версії 1.21.6–1.21.11. Сервер: СКОРО | Discord: СКОРО">
+<meta property="og:image" content="https://pbs.twimg.com/media/HCMUv6FWcAEEUqA?format=jpg&name=medium">
+<meta property="og:image:alt" content="Магній — Ванільний Український майн сервер">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="АЙПІ">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Магній">
+<meta property="og:locale" content="uk_UA">
+
+<!-- Twitter Card для кращого відображення -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Магній 🌀 — Ванільний Український майн сервер">
+<meta name="twitter:description" content="Приєднайся до українського ванільного Minecraft сервера Магній! Класичне виживання без приватів, активна спільнота. СКОРО">
+<meta name="twitter:image" content="https://pbs.twimg.com/media/HCMUv6FWcAEEUqA?format=jpg&name=medium" />
+<link rel="image_src" href="images/minecraft_title.png">
+<meta name="theme-color" content="#ff6600">
+
+<link rel="icon" href="images/logo.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+  <!-- Particles container (used by script) -->
+  <div class="particles" id="particles"></div>
+
+  <div class="content-wrapper" id="main">
+<header>
+  <div class="brand">
+    <img src="images/logo.png" alt="Магній Logo" width="48" height="48">
+    <div>
+      <div class="title">Магній</div>
+      <div class="sub">Ванільний Український майн сервер</div>
+    </div>
+  </div>
+
+  <nav class="nav-links" aria-label="Головна навігація" id="navLinks">
+    <a href="/" class="active"><i class="fa-solid fa-house"></i> Головна  </a>
+    <a href="rules/index.htm"><i class="fa-solid fa-scroll"></i> Правила</a>
+    <a href="mods/index.htm"><i class="fa-solid fa-puzzle-piece"></i> Моди</a>
+  </nav>
+
+  <div class="controls">
+    <button class="burger-btn" id="burgerBtn" aria-label="Відкрити меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+    <main>
+      <section class="info-box" aria-labelledby="welcomeTitle">
+        <h2 id="welcomeTitle">🌀 Вітаємо на Магній</h2>
+        <p><strong>Це місце для тих, хто любить класичне виживання без привату — з друзями або новими знайомими.</strong></p>
+        <p>На сайті ти знайдеш <strong>правила</strong>, <strong>список гравців</strong> і <strong>моди</strong>.</p>
+        <p>Сервер підтримує моди: <strong>Simple Voice Chat</strong>, <strong>Patpat</strong>, <strong>Emotecraft</strong>.</p>
+
+<div class="server-status-wrap" aria-live="polite" aria-atomic="true">
+  <div class="server-status" id="serverStatus">
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      <!-- ip-chip is now a BUTTON that copies IP -->
+      <button class="ip-chip" id="copyIp" aria-label="Копіювати IP">
+        <i class="fa-solid fa-network-wired"></i> <strong>АЙПІ</strong>
+      </button>
+
+      <!-- button to show current online players in modal - same style as IP -->
+      <button class="action-btn" id="showPlayersBtn" aria-haspopup="dialog">
+        <i class="fa-solid fa-users"></i> Гравці  на сервері
+      </button>
+
+      <!-- online count next to buttons -->
+      <div class="online-count" id="onlineCount"><i class="fa-solid fa-spinner fa-spin"></i>  Завантаження...</div>
+    </div>
+
+    <div style="margin-top:8px;">
+      <div id="serverMotd" style="color:var(--muted);">
+  <i class="fa-solid fa-spinner fa-spin"></i></div>
+    </div>
+
+    <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+      <div style="color:var(--muted)"><i class="fa-solid fa-earth-europe"></i> Версія: <strong id="serverVersion">1.21.11</strong></div>
+      <div style="color:var(--muted)"><i class="fa-solid fa-download"></i> <strong>1.21.6 – 1.21.11</strong></div>
+    </div>
+  </div>
+
+  <img src="images/logo.png" alt="Магній" class="status-logo" width="96" height="96" loading="lazy">
+</div>
+
+        <div class="button-group" aria-hidden="true">
+          <a href="https://discord.gg/ywewKPUXVr" target="_blank" rel="noopener" class="join-btn" id="joinDiscord"><i class="fa-brands fa-discord"></i>   Приєднатись до Discord</a>
+        </div>
+      </section>
+
+      <aside class="discord-widget" aria-label="Дискорд сервер">
+        <iframe src="https://discord.com/widget?id=1477269710042042400&theme=dark" width="340" height="480" allowtransparency="true" loading="lazy" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      </aside>
+    </main>
+
+    <div class="decorative-image bottom-image" style="width:100%; max-width:1200px; margin-top:1.5rem;">
+      <img src="images/minecraft_title.png" alt="Магній" style="width:100%; height:auto; display:block; border-radius:12px" loading="lazy">
+    </div>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-content">
+
+      <!-- ABOUT -->
+      <div class="footer-section">
+        <h3> Магній</h3>
+        <p class="footer-tagline">
+          
+                 Український ванільний Minecraft сервер
+        </p>
+        <p>
+
+          </a>
+        </p>
+      </div>
+
+
+
+      <!-- NAVIGATION -->
+      <div class="footer-section">
+        <h3><i class="fa-solid fa-list"></i> Навігація</h3>
+        <a href="index.htm"><i class="fa-solid fa-house"></i> Головна</a>
+        <a href="rules/index.htm"><i class="fa-solid fa-scroll"></i> Правила</a>
+        <a href="mods/index.htm"><i class="fa-solid fa-puzzle-piece"></i> Моди</a>
+        <a href="https://discord.gg/ywewKPUXVr" target="_blank" rel="noopener">
+          <i class="fa-brands fa-discord"></i> Discord
+        </a>
+      </div>
+
+      <!-- DOCUMENTS -->
+      <div class="footer-section">
+        <h3><i class="fa-solid fa-file-lines"></i> Документи</h3>
+        <a href="terms/index.htm"><i class="fa-solid fa-file-contract"></i> Користувацька угода</a>
+      </div>
+
+      <!-- SOCIALS + MONITORING -->
+      <div class="footer-section">
+        <h3><i class="fa-solid fa-share-nodes"></i> Соціальні мережі</h3>
+        <div class="social-links">
+          <a href="error/404.html" target="_blank" rel="noopener" class="css-vote-button style-3">
+            <i class="fa-brands fa-youtube"></i> YouTube
+          </a>
+          <a href="error/404.html" target="_blank" rel="noopener" class="css-vote-button style-3">
+            <i class="fa-brands fa-tiktok"></i> TikTok
+          </a>
+        </div>
+
+        <h3 style="margin-top:1rem;">
+          <i class="fa-solid fa-chart-line"></i> Моніторинг
+        </h3>
+        <div class="social-links">
+          <a href="https://allmc.in.ua/mc-cleverfox-com-ua" target="_blank" class="css-vote-button style-3">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Allmc</span>
+          </a>
+          <a href="https://mcua.top/server-cleverfox.172/vote" target="_blank" class="css-vote-button style-3">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>MCUA.TOP</span>
+          </a>
+          <a href="https://disflip.com/guild/1392752422123995166" target="_blank" class="css-vote-button style-3">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Disflip</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div style="text-align:center; margin-top:1rem; color:#bdbdbd;">
+      <p>
+        <i class="fa-regular fa-copyright"></i>
+        © Магній — <span id="currentYear"></span>. Магній. Всі права окиснені.
+      </p>
+      <p>
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        Сервер не пов'язаний з Mojang Studios
+      </p>
+    </div>
+  </div>
+</footer>
+
+<div class="scroll-top" id="scrollTop" role="button" aria-label="Повернутись вгору" tabindex="0">
+  <i class="fa-solid fa-arrow-up"></i>
+</div>
+
+
+<!-- Modal for players -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <div id="modalTitle" class="modal-title"><i class="fa-solid fa-users"></i> Гравці на сервері</div>
+          <div id="modalCount" style="color:var(--muted); margin-top:6px;"><i class="fa-solid fa-spinner fa-spin"></i>Завантаження...</div>
+        </div>
+        <div class="modal-controls">
+          <button class="small-btn" id="refreshPlayers">Оновити</button>
+          <button class="small-btn" id="closeModal" aria-label="Закрити">✕</button>
+        </div>
+      </div>
+
+      <div id="playersContainer" class="players-list" aria-live="polite"></div>
+      <div id="playersEmpty"><i class="fa-solid fa-spinner fa-spin"></i>Завантаження списку гравців...</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-hidden="true"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+<script defer="" src="beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"3c72e6bd5869478193ffc748585312b5","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</div></body>
+</html>

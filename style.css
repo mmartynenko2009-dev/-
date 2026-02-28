@@ -1,0 +1,602 @@
+﻿@font-face {
+  font-family: 'Minecraft';
+  src: url('Minecraft_1.1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.minecraft-emoji {
+  font-family: 'Noto Color Emoji', 'Minecraft';
+  image-rendering: pixelated;
+}
+
+:root {
+  --bg: #0f0f0f;
+  --bg-card: #1a1a1a;
+  --accent: #006eff;
+  --accent-2: #47acff;
+  --accent-glow: rgba(0, 153, 255, 0.3);
+  --muted: #999;
+}
+
+* { box-sizing: border-box; }
+html,body { height: 100%; }
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1520 100%);
+  font-family: 'Minecraft', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* particles container */
+.particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+.particle { position: absolute; background: var(--accent); border-radius: 50%; opacity: 0.18; }
+
+.content-wrapper {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0 1rem 3rem;
+}
+
+/* Header */
+header {
+  width: 100%;
+  background: rgba(0, 153, 255, 0.2);
+  backdrop-filter: blur(20px);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 700;
+  border-radius: 0 0 50px 50px;
+  box-shadow: 0 8px 32px rgba(0, 153, 255, 0.2),
+              0 0 80px rgba(0, 153, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  animation: slideDown 0.6s ease-out;
+  border: 1px solid rgba(0, 153, 255, 0.2);
+}
+header a {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0, 153, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ефект світіння при наведенні */
+header a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 153, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+header a:hover::before {
+    left: 100%;
+}
+
+/* Активне посилання */
+header a.active {
+    background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 153, 255, 0.2));
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+header a:hover {
+    color: var(--accent-2);
+    transform: translateY(-2px);
+    background: rgba(0, 153, 255, 0.2);
+}
+/* Brand */
+.brand { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  cursor: pointer;
+  flex-shrink: 0;
+  flex: 0 0 auto;
+  min-width: 280px; /* фіксована ширина для балансу */
+}
+.brand img { 
+  width: 48px; 
+  height: 48px; 
+  border-radius: 12px; 
+  box-shadow: 0 0 20px var(--accent-glow); 
+}
+.brand .title { 
+  color: var(--accent); 
+  font-size: 1.1rem; 
+  font-weight: 800; 
+  text-shadow: 0 0 15px var(--accent-glow);
+  line-height: 1.2;
+}
+.brand .sub { 
+  color: var(--muted); 
+  font-size: 0.75rem; 
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Nav - центрування */
+.nav-links { 
+  display: flex; 
+  gap: 8px; 
+  flex-wrap: wrap; 
+  justify-content: center;
+  flex: 1 1 auto;
+}
+
+/* Controls (burger) - така ж ширина як brand для балансу */
+.controls {
+  flex: 0 0 auto;
+  min-width: 280px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Burger */
+.burger-btn { 
+  display: none; 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  padding: 8px; 
+  z-index: 30; 
+}
+
+@media (max-width: 900px) {
+  .brand {
+    min-width: auto;
+  }
+  
+  .controls {
+    min-width: auto;
+  }
+  
+  .burger-btn { 
+    display: block; 
+  }
+  
+  .nav-links { 
+    position: fixed; 
+    top: 0; 
+    left: -100%; 
+    width: 75%; 
+    height: 100vh; 
+    background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 153, 255, 0.2)); 
+    flex-direction: column; 
+    padding: 90px 25px 25px; 
+    gap: 8px; 
+    transition: left .35s; 
+    z-index: 30; 
+  }
+  
+  .nav-links.active { 
+    left: 0; 
+  }
+}
+nav a {
+  color:var(--accent);
+  padding:8px 14px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:700;
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  transition:all .18s ease;
+  position:relative; overflow:hidden;
+}
+nav a::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(0, 153, 255, 0.2), transparent); transition:left .5s; }
+nav a::before { left:100%; }
+nav a:hover, nav a:focus { color:var(--accent-2); transform: translateY(-2px); background: rgba(0, 153, 255, 0.2); }
+nav a.active { background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 153, 255, 0.2)); box-shadow:0 0 20px var(--accent-glow); }
+
+/* Burger */
+.burger-btn { display:none; background:none; border:none; cursor:pointer; padding:8px; z-index:30; }
+.burger-btn span { display:block; width:28px; height:3px; background:var(--accent); margin:5px 0; transition:.3s; border-radius:2px; box-shadow:0 0 10px var(--accent-glow); }
+.burger-btn.active span:nth-child(1){ transform: rotate(45deg) translate(8px,8px); }
+.burger-btn.active span:nth-child(2){ opacity:0; }
+.burger-btn.active span:nth-child(3){ transform: rotate(-45deg) translate(7px,-7px); }
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Main */
+main { max-width:1400px; width:100%; display:flex; gap:2rem; justify-content:center; margin-top:2rem; padding:0 1rem; align-items:flex-start; flex-wrap:wrap; }
+.info-box {
+  background: linear-gradient(135deg, rgba(43, 1, 1, 0), rgba(43, 1, 1, 0));
+  border-radius:30px; padding:2.5rem; flex:1 1 600px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 40px var(--accent-glow);
+  border:2px solid rgba(0, 153, 255, 0.2);
+  position:relative; overflow:hidden;
+}
+.info-box h2 { margin:0 0 .8rem 0; color:var(--accent); font-weight:700; }
+.info-box p { margin:.6rem 0; color:#e6e6e6; line-height:1.6; }
+
+/* Server status */
+.server-status-wrap {
+  display:flex; gap:12px; align-items:center; justify-content:space-between;
+  background: linear-gradient(135deg, rgba(20,20,25,0.9), rgba(15,15,20,0.95));
+  border-radius:20px; padding:1rem; box-shadow:0 0 30px rgba(0, 153, 255, 0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+  margin-top:1.25rem; border:1px solid rgba(0, 153, 255, 0.2); width:100%;
+}
+.server-status { flex:1; display:flex; flex-direction:column; gap:6px; color:var(--muted); }
+.online-count { font-size:1.15rem; color:var(--accent-2); font-weight:800; text-shadow:0 0 15px var(--accent-glow); }
+
+.status-logo { width:96px; height:auto; border-radius:20px; box-shadow:0 0 30px var(--accent-glow); }
+
+/* ip chip and action buttons - unified style */
+.ip-chip,
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.03);
+  font-weight: 800;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-decoration: none;
+}
+
+.ip-chip:hover,
+.action-btn:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(0, 153, 255, 0.2);
+  color: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+/* Стилі для основної CTA кнопки Discord */
+/* ======== КНОПКА ======== */
+.join-btn {
+  display: block;
+  background: linear-gradient(135deg, #0026ff, #003cff, #47acff);
+  background-size: 200% 200%;
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 100px;
+  font-weight: bold;
+  font-size: 1.15rem;
+  text-decoration: none;
+  margin: 2rem auto 0;
+  transition: all 0.4s cubic-bezier(0, 153, 255, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 4, 255, 0.4),
+              0 0 0 0 rgba(0, 38, 255, 0.7);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: gradientShift 3s ease infinite;
+  border: 2px solid rgba(0, 153, 255, 0.3);
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.join-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(0, 153, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.join-btn:hover::before {
+  width: 350px;
+  height: 300px;
+}
+
+.join-btn:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 15px 50px rgba(0, 153, 255, 0.3),
+              0 0 0 15px rgba(0, 153, 255, 0.2),
+              0 0 0 30px rgba(0, 153, 255, 0.2);
+}
+
+.join-btn:active {
+  transform: scale(1.02);
+}
+
+/* toast */
+.toast {
+  position: fixed; right:20px; bottom:20px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:white; padding:12px 18px; border-radius:12px;
+  opacity:0; transform: translateY(16px); transition: all .25s; box-shadow: 0 6px 30px var(--accent-glow);
+  z-index:300; font-weight:700; pointer-events:none;
+}
+.toast.show { opacity:1; transform: translateY(0); }
+
+/* Modal players - prettier */
+.modal-backdrop {
+  position: fixed; inset:0; background: rgba(0,0,0,0.8); display:none; align-items:center; justify-content:center;
+  z-index:400; padding: 20px;
+}
+.modal-backdrop.show { display:flex; }
+
+.modal {
+  background: linear-gradient(135deg, rgba(28,28,34,0.96), rgba(20,20,24,0.98));
+  border-radius:16px; padding:18px; width: min(980px, 96%); max-height: 80vh; overflow:auto;
+  border: 2px solid rgba(0, 153, 255, 0.2); box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+}
+.modal-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+.modal-title { color:var(--accent); font-size:1.4rem; font-weight:800; text-shadow:0 0 12px var(--accent-glow); }
+.modal-controls { display:flex; gap:8px; }
+.modal .small-btn { background: transparent; border:1px solid rgba(0, 153, 255, 0.2); padding:8px 10px; border-radius:8px; color:var(--muted); cursor:pointer; }
+.modal .small-btn:hover { background: rgba(0, 153, 255, 0.2); color:var(--accent-2); }
+
+.players-list {
+  display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap:12px;
+}
+
+.player-card {
+  display:flex; flex-direction:column; align-items:center; gap:8px; padding:12px; border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,102,0,0.04), rgba(255,102,0,0.02));
+  border: 1px solid rgba(255,102,0,0.08); transition: transform .18s ease, box-shadow .18s ease;
+  cursor: pointer;
+}
+.player-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0, 153, 255, 0.2); background: linear-gradient(180deg, rgba(255,102,0,0.08), rgba(255,102,0,0.03)); }
+.player-card img { width:72px; height:72px; border-radius:10px; image-rendering: pixelated; box-shadow:0 6px 18px rgba(0,0,0,0.6); }
+.player-name { font-weight:800; color:#fff; font-size:0.95rem; text-align:center; word-break:break-word; }
+
+/* make inner link cover image+name without default link styles */
+.player-link { display:flex; flex-direction:column; align-items:center; gap:8px; text-decoration:none; color:inherit; }
+
+/* actions (copy / profile) under each card */
+.player-actions { display:flex; gap:8px; margin-top:6px; }
+.player-action-btn { background: transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); padding:6px 10px; border-radius:8px; font-weight:700; cursor:pointer; text-decoration:none; }
+.player-action-btn:hover { background: rgba(255,102,0,0.06); color:var(--accent-2); border-color: rgba(0, 153, 255, 0.2); transform: translateY(-3px); }
+
+.player-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0, 153, 255, 0.2); }
+
+#playersEmpty { text-align:center; color:var(--muted); padding:1.5rem; }
+
+/* Discord widget */
+.discord-widget {
+  flex: 0 0 380px; min-width: 300px; max-width: 380px;
+  border-radius:20px; padding:12px; display:flex; justify-content:center; align-items:center;
+  background: linear-gradient(135deg, rgba(30,30,35,0.9), rgba(25,25,30,0.95));
+  border:2px solid rgba(88,101,242,0.3);
+}
+.discord-widget iframe { border-radius:12px; border:none; }
+
+/* Декоративні зображення */
+.decorative-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.decorative-image img {
+  max-width: 800px;
+  width: 100%;
+  height: auto;
+}
+
+.top-image {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.middle-image {
+  margin: 2rem 0;
+}
+
+.bottom-image {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+/* ======== ФУТЕР ======== */
+footer {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(30, 30, 35, 0.95), rgba(20, 20, 25, 0.98));
+  backdrop-filter: blur(20px);
+  padding: 3rem 2rem 1.5rem;
+  margin-top: 5rem;
+  box-shadow: 0 -8px 40px rgba(0, 153, 255, 0.2);
+  border-top: 2px solid rgba(0, 153, 255, 0.2);
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+  color: var(--accent);
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+  text-shadow: 0 0 15px var(--accent-glow);
+}
+
+.footer-section p,
+.footer-section a {
+  color: #ccc;
+  text-decoration: none;
+  display: block;
+  margin: 0.7rem 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--accent-2);
+  padding-left: 8px;
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.footer-tagline {
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.social-links a {
+  background: rgba(0, 153, 255, 0.2);
+  padding: 10px 16px;
+  border-radius: 12px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 153, 255, 0.3);
+}
+
+.social-links a:hover {
+  background: rgba(0, 153, 255, 0.3);
+  transform: translateY(-3px) scale(1.05);
+  padding-left: 16px;
+  box-shadow: 0 5px 20px rgba(0, 153, 255, 0.3);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(0, 153, 255, 0.3);
+  padding-top: 1.5rem;
+  text-align: center;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.footer-bottom p {
+  margin: 0.5rem 0;
+}
+/* Загальні стилі для кнопок (додайте один раз) */
+.css-vote-button { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-family: "Minecraft"; 
+  font-size: 16px; 
+  font-weight: 700; 
+  padding: 12px 20px; 
+  border-radius: 8px; 
+  border: none; 
+  cursor: pointer; 
+  transition: all 0.2s ease; 
+  text-decoration: none !important; color: white; }
+.css-vote-button i.icon { margin-right: 0.7em !important; font-size: 1.2em; }
+.css-vote-button:hover { transform: translateY(-2px); }
+
+/* Стилі для конкретної кнопки (style-3) */
+.css-vote-button.style-3 { font-family: 'minecraft-cyrillic', 'Minecraft', monospace; background-color: #707070; text-shadow: 2px 2px 0 #383838; border: 2px solid #000; box-shadow: inset 2px 2px 0 #a0a0a0, inset -2px -2px 0 #383838; border-radius: 10px; }
+.css-vote-button.style-3:active { box-shadow: inset 2px 2px 0 #383838, inset -2px -2px 0 #a0a0a0; }
+/* ======== SCROLL TO TOP ======== */
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 25px var(--accent-glow);
+  z-index: 100;
+  border: 2px solid rgba(0, 153, 255, 0.3);
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scroll-top:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 10px 35px var(--accent-glow);
+}
+
+.scroll-top::before {
+  content: '↑';
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .discord-widget { display:none; }
+  .burger-btn { display:block; }
+  .nav-links { position: fixed; top: 0; left: -100%; width:75%; height:100vh; background: linear-gradient(135deg, rgba(30,30,35,0.98), rgba(20,20,25,0.98)); flex-direction:column; padding:90px 25px 25px; gap:8px; transition:left .35s; z-index:30; }
+  .nav-links.active { left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particles, .particle { display:none !important; }
+  * { transition:none !important; animation:none !important; }
+}
